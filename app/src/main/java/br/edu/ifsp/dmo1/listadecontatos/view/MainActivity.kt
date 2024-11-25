@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import br.edu.ifsp.dmo1.listadecontatos.R
@@ -147,12 +148,18 @@ class MainActivity : AppCompatActivity() , OnItemClickListener {
                     /* Código que é executado quando se clica no botão
                     salvar do dialog */
                     Log.v(TAG, "Salvar contato")
-                    ContactDao.insert(
-                        Contact(
-                            bindingDialog.edittextName.text.toString(),
-                            bindingDialog.edittextPhone.text.toString()
+                    if(bindingDialog.edittextName.text.toString().isEmpty() or  bindingDialog.edittextPhone.text.toString().isEmpty()){
+                        dialog.dismiss()
+                        Toast.makeText(this,"O conato nao pode ser nulo", Toast.LENGTH_SHORT).show()
+
+                    }else {
+                        ContactDao.insert(
+                            Contact(
+                                bindingDialog.edittextName.text.toString(),
+                                bindingDialog.edittextPhone.text.toString()
+                            )
                         )
-                    )
+                    }
                     updateListDatasoruce()
                     dialog.dismiss()
                 })
