@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() , OnItemClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ListContactAdapter
     private val listDatasource = ArrayList<Contact>()
+    private var units: Int = 0;
+    private var amount: Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +31,30 @@ class MainActivity : AppCompatActivity() , OnItemClickListener {
         setContentView(binding.root)
 
 
+        if(savedInstanceState != null){
+            // um meio seria usar serialização para serializar os dados da lista, porém
+            // grande parte dessa forma de resolução utiliza conhecimentos previos nao conhecidos por mim ainda
+            // fica como duvida pra aula
+        }
+
+
         Log.v(TAG, "Executando o onCreate()")
         configClickListener()
         configListview()
 
+        Log.v(TAG,"State = Created")
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+
+
+        Log.v(TAG,"Save Instance")
+        outState.putInt("units", units)
+        outState.putInt("amount", amount)
+    }
+
 
     override fun onStart() {
         Log.v(TAG, "Executando o onStart()")
@@ -145,5 +166,4 @@ class MainActivity : AppCompatActivity() , OnItemClickListener {
             })
         builderDialog.create().show()
     }
-
 }
