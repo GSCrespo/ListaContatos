@@ -2,7 +2,7 @@ package br.edu.ifsp.dmo1.listadecontatos.model
 
 import java.util.LinkedList
 
-class ContactDao {
+object ContactDao {
 
     private val dataset = LinkedList<Contact>()
 
